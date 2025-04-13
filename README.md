@@ -76,29 +76,29 @@ TBD
 
 1. After the deployment is complete, get the information by running the following commands:
 
-  - function app name:
+   - function app name:
 
-    ```bash
-    azd env get-value AZURE_FUNCTION_NAME
-    ```
+     ```bash
+     azd env get-value AZURE_FUNCTION_NAME
+     ```
 
-  - MCP server access key:
+   - MCP server access key:
 
-    ```bash
-    # bash/zsh
-    az functionapp keys list \
-        -g rg-$(azd env get-value AZURE_ENV_NAME) \
-        -n $(azd env get-value AZURE_FUNCTION_NAME) \
-        --query "systemKeys.mcp_extension" -o tsv
-    ```
+     ```bash
+     # bash/zsh
+     az functionapp keys list \
+         -g rg-$(azd env get-value AZURE_ENV_NAME) \
+         -n $(azd env get-value AZURE_FUNCTION_NAME) \
+         --query "systemKeys.mcp_extension" -o tsv
+     ```
 
-    ```bash
-    # PowerShell
-    az functionapp keys list `
-        -g rg-$(azd env get-value AZURE_ENV_NAME) `
-        -n $(azd env get-value AZURE_FUNCTION_NAME) `
-        --query "systemKeys.mcp_extension" -o tsv
-    ```
+     ```bash
+     # PowerShell
+     az functionapp keys list `
+         -g rg-$(azd env get-value AZURE_ENV_NAME) `
+         -n $(azd env get-value AZURE_FUNCTION_NAME) `
+         --query "systemKeys.mcp_extension" -o tsv
+     ```
 
 ### Connect MCP server to an MCP host/client
 
@@ -162,7 +162,7 @@ TBD
 1. Set the URL to your running Function app's SSE endpoint and **Connect**:
 
     ```text
-    https://<function_app_name>.azurewebsites.net/runtime/webhooks/mcp/sse
+    https://<FUNCTION_APP_NAME>.azurewebsites.net/runtime/webhooks/mcp/sse?code=<MCP_SERVER_ACCESS_KEY>
     ```
 
 1. Click **List Tools**.
