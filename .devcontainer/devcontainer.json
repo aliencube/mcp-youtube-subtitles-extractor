@@ -1,5 +1,5 @@
 {
-  "name": "GitHub Copilot Bootcamp",
+  "name": "MCP: YouTube Subtitles Extractor",
 
   "image": "mcr.microsoft.com/devcontainers/dotnet:8.0-noble",
 
