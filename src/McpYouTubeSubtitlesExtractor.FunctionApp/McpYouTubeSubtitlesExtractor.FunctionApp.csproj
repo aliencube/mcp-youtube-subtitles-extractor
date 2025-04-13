@@ -6,6 +6,8 @@
 
     <AssemblyName>Aliencube.McpYouTubeSubtitlesExtractor.FunctionApp</AssemblyName>
     <RootNamespace>Aliencube.McpYouTubeSubtitlesExtractor.FunctionApp</RootNamespace>
+
+    <UserSecretsId>3301718c-063f-492b-a90b-93484c603012</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
