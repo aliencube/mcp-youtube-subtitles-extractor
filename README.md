@@ -50,10 +50,6 @@ This is an MCP server that extracts subtitles from a given YouTube link.
     func start
     ```
 
-### Run Azure Functions MCP server locally in a container
-
-TBD
-
 ### Run Azure Functions MCP server remotely
 
 1. Login to Azure
