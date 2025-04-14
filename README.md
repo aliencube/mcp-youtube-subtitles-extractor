@@ -5,29 +5,23 @@ This is an MCP server that extracts subtitles from a given YouTube link.
 ## Prerequisites
 
 - [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)
+- [Visual Studio Code](https://code.visualstudio.com/) with
+  - [C# Dev Kit](https://marketplace.visualstudio.com/items/?itemName=ms-dotnettools.csdevkit) extension
+  - [Azure Functions extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions) extension
 - [Azure Functions Core Tools](https://learn.microsoft.com/azure/azure-functions/functions-run-local?pivots=programming-language-csharp#install-the-azure-functions-core-tools)
 - [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)
 - [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- [Visual Studio 2022](https://visualstudio.microsoft.com/vs/) or [Visual Studio Code](https://code.visualstudio.com/) with [C# Dev Kit](https://marketplace.visualstudio.com/items/?itemName=ms-dotnettools.csdevkit) and [Azure Functions extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions)
 - [Docker Desktop](https://docs.docker.com/get-started/get-docker/)
 
 ## Getting Started
 
-### Run Azurite for local development
-
-1. Run Azurite
-
-    ```bash
-    # bash/zsh
-    docker run -d -p 10000:10000 -p 10001:10001 -p 10002:10002 \
-        --name azurite mcr.microsoft.com/azure-storage/azurite
-    ```
-
-    ```powershell
-    # PowerShell
-    docker run -d -p 10000:10000 -p 10001:10001 -p 10002:10002 `
-        --name azurite mcr.microsoft.com/azure-storage/azurite
-    ```
+- [Run Azure Functions MCP server locally](#run-azure-functions-mcp-server-locally)
+- [Run Azure Functions MCP server remotely](#run-azure-functions-mcp-server-remotely)
+- [Connect MCP server to an MCP host/client](#connect-mcp-server-to-an-mcp-hostclient)
+  - [VS Code + Agent Mode + Local MCP server](#vs-code--agent-mode--local-mcp-server)
+  - [MCP Inspector + Local MCP server](#mcp-inspector--local-mcp-server)
+  - [VS Code + Agent Mode + Remote MCP server](#vs-code--agent-mode--remote-mcp-server)
+  - [MCP Inspector + Remote MCP server](#mcp-inspector--remote-mcp-server)
 
 ### Run Azure Functions MCP server locally
 
@@ -158,7 +152,7 @@ This is an MCP server that extracts subtitles from a given YouTube link.
 1. Set the URL to your running Function app's SSE endpoint and **Connect**:
 
     ```text
-    https://<FUNCTION_APP_NAME>.azurewebsites.net/runtime/webhooks/mcp/sse?code=<MCP_SERVER_ACCESS_KEY>
+    https://<functionapp-name>.azurewebsites.net/runtime/webhooks/mcp/sse?code=<functions-mcp-extension-system-key>
     ```
 
 1. Click **List Tools**.
