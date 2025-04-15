@@ -1,5 +1,7 @@
 # MCP Server: Youtube Subtitles Extractor
 
+👉👉👉 **MOVED TO https://github.com/microsoft/mcp-dotnet-samples** 👈👈👈
+
 This is an MCP server that extracts subtitles from a given YouTube link.
 
 ## Prerequisites
