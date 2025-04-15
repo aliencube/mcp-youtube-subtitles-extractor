@@ -25,7 +25,7 @@ This is an MCP server that extracts subtitles from a given YouTube link.
 
 ### Run Azure Functions MCP server locally
 
-1. Get the repository root
+1. Get the repository root.
 
     ```bash
     # bash/zsh
@@ -37,16 +37,85 @@ This is an MCP server that extracts subtitles from a given YouTube link.
     $REPOSITORY_ROOT = git rev-parse --show-toplevel
     ```
 
-1. Run the function app
+1. Run the function app.
 
     ```bash
     cd $REPOSITORY_ROOT/src/McpYouTubeSubtitlesExtractor.FunctionApp
     func start
     ```
 
+### Run Azure Functions MCP server locally in a container
+
+1. Make sure your Docker Desktop is up and running.
+1. Get the repository root.
+
+    ```bash
+    # bash/zsh
+    REPOSITORY_ROOT=$(git rev-parse --show-toplevel)
+    ```
+
+    ```powershell
+    # PowerShell
+    $REPOSITORY_ROOT = git rev-parse --show-toplevel
+    ```
+
+1. Make sure you're at the repository root.
+
+    ```bash
+    cd $REPOSITORY_ROOT
+    ```
+
+1. Containerise the function app.
+
+    ```bash
+    # bash/zsh
+    dotnet publish ./src/McpYouTubeSubtitlesExtractor.FunctionApp \
+        -t:PublishContainer \
+        --os linux --arch x64 \
+        -p:ContainerBaseImage=mcr.microsoft.com/azure-functions/dotnet-isolated:4-dotnet-isolated9.0 \
+        -p:ContainerRepository=mcp-remote-funcapp \
+        -p:ContainerImageTag=9.0 \
+        -p:ContainerWorkingDirectory="/home/site/wwwroot"
+    ```
+
+    ```powershell
+    # PowerShell
+    dotnet publish ./src/McpYouTubeSubtitlesExtractor.FunctionApp `
+        -t:PublishContainer `
+        --os linux --arch x64 `
+        -p:ContainerBaseImage=mcr.microsoft.com/azure-functions/dotnet-isolated:4-dotnet-isolated9.0 `
+        -p:ContainerRepository=mcp-remote-funcapp `
+        -p:ContainerImageTag=9.0 `
+        -p:ContainerWorkingDirectory="/home/site/wwwroot"
+    ```
+
+1. Run the container.
+
+    ```bash
+    # bash/zsh
+    docker run \
+        -v $REPOSITORY_ROOT/volume:/azure-functions-host/Secrets \
+        -e AzureWebJobsSecretStorageType=files \
+        -d -p 7071:80 \
+        --name mcp-remote-funcapp \
+        mcp-remote-funcapp:9.0
+    ```
+    
+    ```powershell
+    # PowerShell
+    docker run `
+        -v $REPOSITORY_ROOT/volume:/azure-functions-host/Secrets `
+        -e AzureWebJobsSecretStorageType=files `
+        -d -p 7071:80 `
+        --name mcp-remote-funcapp `
+        mcp-remote-funcapp:9.0
+    ```
+
+   > **NOTE**: While running this container image, it mounts the `volume` directory that contains `host.json`, and the `host.json` file mimics the access key. Therefore, **DO NOT USE** this approach for the production deployment scenario.
+
 ### Run Azure Functions MCP server remotely
 
-1. Login to Azure
+1. Login to Azure.
 
     ```bash
     # Login with Azure CLI
@@ -56,13 +125,13 @@ This is an MCP server that extracts subtitles from a given YouTube link.
     azd auth login
     ```
 
-1. Deploy the Function app to Azure
+1. Deploy the Function app to Azure.
 
     ```bash
     azd up
     ```
 
-   While provisioning and deploying, you'll be asked to provide subscription ID, location, environment name and vNet
+   While provisioning and deploying, you'll be asked to provide subscription ID, location, environment name and vNet.
 
 1. After the deployment is complete, get the information by running the following commands:
 
@@ -107,14 +176,14 @@ This is an MCP server that extracts subtitles from a given YouTube link.
 
 #### MCP Inspector + Local MCP server
 
-1. Run MCP Inspector
+1. Run MCP Inspector.
 
     ```bash
     npx @modelcontextprotocol/inspector node build/index.js
     ```
 
-1. Open a web browser and navigate to the MCP Inspector web app from the URL displayed by the app (e.g. http://0.0.0.0:5173)
-1. Set the transport type to `SSE` 
+1. Open a web browser and navigate to the MCP Inspector web app from the URL displayed by the app (e.g. http://0.0.0.0:5173).
+1. Set the transport type to `SSE`.
 1. Set the URL to your running Function app's SSE endpoint and **Connect**:
 
     ```text
@@ -141,14 +210,14 @@ This is an MCP server that extracts subtitles from a given YouTube link.
 
 #### MCP Inspector + Remote MCP server
 
-1. Run MCP Inspector
+1. Run MCP Inspector.
 
     ```bash
     npx @modelcontextprotocol/inspector node build/index.js
     ```
 
-1. Open a web browser and navigate to the MCP Inspector web app from the URL displayed by the app (e.g. http://0.0.0.0:5173)
-1. Set the transport type to `SSE` 
+1. Open a web browser and navigate to the MCP Inspector web app from the URL displayed by the app (e.g. http://0.0.0.0:5173).
+1. Set the transport type to `SSE`.
 1. Set the URL to your running Function app's SSE endpoint and **Connect**:
 
     ```text

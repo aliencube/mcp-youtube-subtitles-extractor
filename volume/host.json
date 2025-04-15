@@ -1,0 +1,21 @@
+{
+  "masterKey": {
+    "name": "master",
+    "value": "9d5ebf83-8a34-4aef-ba7b-dfcc30d494a0",
+    "encrypted": false
+  },
+  "functionKeys": [
+    {
+      "name": "default",
+      "value": "227ffb70-fa58-4b82-98bf-64c2fdab192f",
+      "encrypted": false
+    }
+  ],
+  "systemKeys": [
+    {
+      "name": "mcp_extension",
+      "value": "a8d63a36-faa5-4bca-abe5-2a2762d0d2b5",
+      "encrypted": false
+    }
+  ]
+}

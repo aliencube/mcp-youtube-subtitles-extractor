@@ -45,4 +45,13 @@
     <Using Include="System.Threading.ExecutionContext" Alias="ExecutionContext" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ContainerEnvironmentVariable Include="AzureWebJobsScriptRoot" Value="/home/site/wwwroot" />
+    <ContainerEnvironmentVariable Include="AzureFunctionsJobHost__Logging__Console__IsEnabled" Value="true" />
+  </ItemGroup>
+
+  <ItemGroup Label="ContainerAppCommand Assignment">
+    <ContainerAppCommand Include="/opt/startup/start_nonappservice.sh" />
+  </ItemGroup>
+
 </Project>
